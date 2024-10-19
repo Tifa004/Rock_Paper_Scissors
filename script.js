@@ -19,15 +19,18 @@ function playgame (rounds) {
     let player = getHumanChoice(x);
     let comp = getComputerChoice();
     let result =playground(player,comp)
-    alert(result)
+
     if (result=='tie'){
         P1++;
         P2++;
+        alert('Tie');
     } else if (result == 'player'){
         P1++;
+        alert('Player Wins');
     }
     else{
         P2++;
+        alert('Computer Wins');
     }
     
 }

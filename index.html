@@ -3,10 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            gap: 60px;
+            background-color: bisque;
+        }
+        h1 {
+            font-size: 48px;
+            margin: 0;
+        }
+        #result {
+            font-size: 24px;
+            display: flex;
+            gap: 50px;
+        }
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+        button {
+            font-size: 24px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e0e0e0;
+        }
+        button:active {
+            background-color: #d0d0d0;
+        }
+    </style>
     <title>Document</title>
 </head>
 <body>
+    <h1>Rock Paper Scissors</h1>
+    <div id="result">
+        <div class="human">👤: 0</div> <div class="comp">🤖: 0</div></div>
+    <div class="buttons">  
+    <button id="rock">ROCK</button>
+    <button id="paper">PAPER</button>
+    <button id="scissors">SCISSORS</button>
+    </div>
     
 </body>
 </html>

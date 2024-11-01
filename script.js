@@ -1,41 +1,70 @@
-function playgame (rounds) {
-    let P1=0;
-    let P2=0;
-    let x;
-    for(let i=0;i<rounds;i++){
-    do {
-        x = prompt("Enter r: Rock , p: Paper , s: Scissors to challenge the Computer");
-        if (x===null){
-            break;
-        }
-        x=x.trim().toUpperCase();
-        if (x!='R' && x!='P' && x!='S'){
-            alert("Invalid input, Try Again");
-        }
-        } while (x!='R' && x!='P' && x!='S');
-        if (x===null){
-            break;
-            }
-    let player = getHumanChoice(x);
+let P1=0;
+let P2=0;
+function playgame (option) {
+    
+    let player = option;
     let comp = getComputerChoice();
     let result =playground(player,comp)
 
     if (result=='tie'){
         P1++;
         P2++;
-        alert('Tie');
+
     } else if (result == 'player'){
         P1++;
-        alert('Player Wins');
     }
     else{
         P2++;
-        alert('Computer Wins');
     }
-    
-}
-
-return x===null ?  null : [P1 , P2] ;
+    if (P1==5 && P2==5){
+        div.textContent=`TIE`;
+        body.removeChild(buttons);
+        body.appendChild(again);
+        again.addEventListener('click',()=>{
+            P1=0;
+            P2=0;
+            human.textContent=`👤: ${P1}`;
+            computer.textContent=`🤖: ${P2}`;
+            body.removeChild(again);
+            body.appendChild(buttons);
+        })
+    }
+    if (P1==5){
+        div.textContent=`👤 Wins`;
+        body.removeChild(buttons);
+        body.appendChild(again);
+        again.addEventListener('click',()=>{
+            P1=0;
+            P2=0;
+            div.textContent=``;
+            human.textContent=`👤: ${P1}`;
+            computer.textContent=`🤖: ${P2}`;
+            div.appendChild(human);
+            div.appendChild(computer);
+            body.removeChild(again);
+            body.appendChild(buttons);
+        })
+    }
+    else if (P2==5){
+        div.textContent=`🤖 Wins`;
+        body.removeChild(buttons);
+        body.appendChild(again);
+        again.addEventListener('click',()=>{
+            P1=0;
+            P2=0;
+            div.textContent=``;
+            human.textContent=`👤: ${P1}`;
+            computer.textContent=`🤖: ${P2}`;
+            div.appendChild(human);
+            div.appendChild(computer);
+            body.removeChild(again);
+            body.appendChild(buttons);
+        })
+    }
+    else{
+        human.textContent=`👤: ${P1}`;
+        computer.textContent=`🤖: ${P2}`;
+    }
 }
 function getComputerChoice(){
     let choices = ['rock', 'paper', 'scissors'];
@@ -43,10 +72,6 @@ function getComputerChoice(){
     return computerChoice;
 }
 
-function getHumanChoice(x){
-    let choice = x.toUpperCase()=='R' ? "rock": x.toUpperCase()=='P' ? 'paper' : x.toUpperCase()=='S' ? "scissors" : 'Invalid';
-    return choice;
-}
 
 function playground (p,c) {
     if (p=='rock' && c=='rock' || p=='paper' && c=='paper' || p=='scissors' && c=='scissors'){
@@ -58,31 +83,23 @@ function playground (p,c) {
     }
     
 }
-let rounds;
-do {
-     rounds = prompt('Enter number of rounds to be played');
-    if (rounds=== null){
-        break
-    }
-    else if (isNaN(rounds) || rounds.trim()===""){
-        alert("Error: That's not a valid number. Please try again.");
-    }
-} while (isNaN(rounds) || rounds.trim()==='');
+const human = document.querySelector('.human');
+const computer = document.querySelector('.comp');
+const buttons = document.querySelector('.buttons');
+const rock_btn = document.querySelector('#rock');
+const paper_btn = document.querySelector('#paper');
+const scissors_btn = document.querySelector('#scissors');
+const body = document.querySelector('body');
 
-let result = playgame(parseInt(rounds));
-if (rounds==0 || rounds ===null ){
-    alert("No rounds played");
-}
-else if (result ===null){
-    alert("Match Cancelled");
-}
-else if (result[0]==result[1]){
-    alert(`It's a tie ${result[0]} : ${result[1]} `);
-}
-else if (result[0]>result[1]){
-    alert(`Player wins ${result[0]} : ${result[1]}`);
-    }
-else{
-    alert(`Computer wins ${result[0]} : ${result[1]}`); 
-    }
+rock_btn.addEventListener('click', () => playgame('rock'));
+paper_btn.addEventListener('click', () => playgame('paper'));
+scissors_btn.addEventListener('click', () => playgame('scissors'));
+
+const div=document.querySelector('#result');
+const again = document.createElement('button');
+again.textContent='Play Again';
+// body.appendChild(again);
+// body.appendChild(div);
+
+
 
